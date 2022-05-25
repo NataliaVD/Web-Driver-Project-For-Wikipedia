@@ -64,17 +64,37 @@ namespace NUnitWebDriverTestsForWikipedia
             searchedElement.Click();
 
 
-            this.wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            this.wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
 
-            var language = wait.Until(driver =>
+            var language = wait.Until(d =>
             {
-                return driver.FindElement(By.XPath("/html/body/div[6]/div/div[1]/ul/li[1]/a"));
+                return d.FindElement(By.LinkText("Polski"));
             });
+
             language.Click();
 
             var expected = "Wikipedia, wolna encyklopedia";
 
             Assert.That(driver.Title, Is.EqualTo(expected));
         }
+
+        /* public void TestChoosePolish()
+         {
+             searchedElement = driver.FindElement(By.CssSelector("#js-lang-list-button > span"));
+             searchedElement.Click();
+
+
+             this.wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+
+             var language = wait.Until(driver =>
+             {
+                 return driver.FindElement(By.XPath("/html/body/div[6]/div/div[1]/ul/li[1]/a"));
+             });
+             language.Click();
+
+             var expected = "Wikipedia, wolna encyklopedia";
+
+             Assert.That(driver.Title, Is.EqualTo(expected));
+         }*/
     }
 }
